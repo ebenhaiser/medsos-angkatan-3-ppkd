@@ -16,8 +16,8 @@ if (mysqli_num_rows($queryLogin) > 0) {
     if ($rowUser['password'] == $password) {
         $_SESSION['name'] = $rowUser['name'];
         $_SESSION['id '] = $rowUser['id'];
-        header("Location: index.php?login=success");
+        header("Location: ../index.php?login=success");
     };
 } else {
-    header("Location: login.php?login=failed");
+    header("Location: ../login.php?login=failed");
 }

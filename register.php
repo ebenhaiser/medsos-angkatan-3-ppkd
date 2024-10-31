@@ -16,16 +16,24 @@
           <div class="card shadow">
             <div class="card-body">
               <div class="card-title">
-                <h3 class="text-center">Welcome!</h3>
-                <p class="text-center">Login</p>
+                <h3 class="card-title text-center">Sign up to see photos and videos from your friends.</h3>
+                <p class="text-center">Sign In</p>
               </div>
-              <?php if(isset($_GET['register']) == 'success'): ?>
-              <div class="alert alert-success">Register success!</div>
+              <?php if(isset($_GET['register']) == 'failed'): ?>
+              <div class="alert alert-danger">Register failed!</div>
               <?php endif ?>
-              <form action="controller/actionLogin.php" method="post">
+              <form action="controller/actionSignUp.php" method="post">
                 <div class="form-group mb-3">
                   <!-- <label for="email" class="form-label">Email</label> -->
-                  <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                  <input type="text" name="full_name" class="form-control" placeholder="Full Name">
+                </div>
+                <div class="form-group mb-3">
+                  <!-- <label for="email" class="form-label">Email</label> -->
+                  <input type="text" name="username" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group mb-3">
+                  <!-- <label for="email" class="form-label">Email</label> -->
+                  <input type="email" name="email" class="form-control" placeholder="Email">
                 </div>
                 <div class="form-group mb-3">
                   <!-- <label for="password" class="form-label">Password</label> -->
@@ -33,7 +41,7 @@
                 </div>
                 <div class="form-group mb-3">
                   <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Log In</button>
+                    <button type="submit" class="btn btn-primary" name="sign_up">Sign Up</button>
                   </div>
                 </div>
               </form>
@@ -41,8 +49,7 @@
           </div>
           <div class="card shadow mt-2">
             <div class="card-body">
-              <p align="center">Don't have an account? <a style="text-decoration: none;" href="register.php">Sign Up</a>
-              </p>
+              <p align="center">Have an account? <a style="text-decoration: none;" href="login.php">Log In</a> </p>
             </div>
           </div>
         </div>
