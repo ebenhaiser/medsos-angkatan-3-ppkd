@@ -1,12 +1,12 @@
 <?php
 session_start();
-session_regenerate_id();
+// session_regenerate_id();
 
-if (empty($_SESSION['name'])) {
+if (empty($_SESSION['username'])) {
     header("location: login.php?access=failed");
 }
 
-include 'connection.php';
+include 'controller/connection.php';
 
 ?>
 <!DOCTYPE html>
@@ -17,6 +17,24 @@ include 'connection.php';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link rel="stylesheet" href="assets/dist/css/bootstrap.min.css" />
+  <!-- summernote -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+
+  <style>
+  .cover {
+    height: 200px;
+  }
+
+  .cover .img {
+    background-size: cover;
+    background-position: center;
+  }
+
+  body {
+    /* background-color: blue; */
+  }
+  </style>
+
 </head>
 
 <body>
@@ -93,6 +111,24 @@ include 'connection.php';
   <?php include 'inc/footer.php' ?>
   <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="app.js"></script>
+  <!-- summernote -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+  <script>
+  $('#summernote').summernote({
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 120,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+  });
+  </script>
 </body>
 
 </html>

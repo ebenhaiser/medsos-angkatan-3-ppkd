@@ -8,6 +8,6 @@
 </style>
 <footer class="fixed-bottom border-top border-black">
   <div class="text-center border-top p-3 footer bg-primary-subtle">
-    Copyright &copy; 2024 PPKD - Jakarta Pusat
+    Copyright &copy; 2024 - Roeang Gaoel
   </div>
 </footer>

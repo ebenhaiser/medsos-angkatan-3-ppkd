@@ -14,33 +14,18 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="?pg=dashboard">Beranda</a>
+            <a class="nav-link" href="?pg=dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?pg=user">Akun</a>
+            <a class="nav-link" href="?pg=user">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="?pg=member">Anggota</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?pg=level">Level</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?pg=category">Kategori</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?pg=book">Buku</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?pg=borrowing">Peminjaman</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?pg=returning"> Pengembalian</a>
+            <a class="nav-link" href="?pg=profile">Profile</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="btn btn-danger" href="actionLogout.php">keluar</a>
+            <a class="btn btn-danger" href="controller/actionLogout.php">keluar</a>
           </li>
         </ul>
       </div>
