@@ -7,8 +7,8 @@
     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
       data-bs-target="#tweetModal">Tweet</button>
   </div>
+  <?php if(mysqli_num_rows($queryTweet) > 0) : ?>
   <div class="col-sm-12 mt-3">
-    <?php if(mysqli_num_rows($queryTweet) > 0) : ?>
     <?php while($rowTweet = mysqli_fetch_assoc($queryTweet)) : ?>
     <div class="d-flex">
       <div class="flex-shrink-0">
@@ -23,6 +23,58 @@
         <?php endif ?>
         <?php echo isset($rowTweet['content']) ? $rowTweet['content'] : '' ?>
       </div>
+    </div>
+    <div class="row">
+      <!-- COMMENT -->
+      <div class="col-sm-4 ms-3">
+        <form action="add_comment.php" method="POST">
+          <!-- <input type="text" name="id_tweet" value="<?php echo $rowTweet['id'] ?>">
+          <input type="text" name="id_user" value="<?php echo $rowTweet['id_user'] ?>"> -->
+
+          <textarea name="comment_text" class="form-control" id="comment_text" cols="5" rows="5"
+            placeholder="Tulis Balasan Anda ... "></textarea>
+          <button class="btn btn-secondary btn-sm mt-2" type="submit">Kirim Balasan</button>
+        </form>
+
+        <div class="alert mt-2" id="comment-alert" style="display: none;"></div>
+        <div class="mt-1">
+          <?php
+          if (isset($rowTweet['id']) && isset($rowTweet['id_user'])) :
+              $idStatus = $rowTweet['id'];
+              $userId = $rowTweet['id_user'];
+              $queryComment = mysqli_query($connection, "SELECT * FROM comments WHERE id_tweet = '$idStatus' AND id_user = '$userId'");
+              $rowCounts = mysqli_fetch_all($queryComment, MYSQLI_ASSOC);
+
+              foreach ($rowCounts as $rowCount) :
+          ?>
+          <span>
+            <pre>Komentar : <?php echo $rowCount['comment_text'] ?></pre>
+          </span>
+          <!-- <div class="d-flex gap-3">
+                                    <p><?php echo $rowComment['comment_text'] ?></p>
+                                    <p><i></i>(<?php echo $rowComment['nama_lengkap'] ?>)</p>
+                                    <p><i></i>(<?php echo $rowComment['nama_pengguna'] ?>)</p>
+                                    <p><small><?php echo $rowComment['tanggal'] ?></small></p>
+                                </div> -->
+          <?php
+              endforeach;
+            endif;
+          ?>
+        </div>
+      </div>
+      <!-- LIKE -->
+      <?php
+        $idStatusnya = $rowTweet['id'];
+        $selectLike = mysqli_query($connection, "SELECT COUNT(id_user) AS countuser FROM likes WHERE id_tweet = '$idStatusnya'");
+        $rowLike = mysqli_fetch_assoc($selectLike);
+      ?>
+      <div class="col-sm-4 status">
+        <!-- <input type="text" id="id_user_like" value="<?php echo $rowTweet['id_user'] ?>"> -->
+        <button class="btn btn-success btn-sm" onclick="toggleLike(<?php echo $rowTweet['id']; ?>)">Like
+          (<?php echo isset($rowLike['countuser']) ? $rowLike['countuser'] : "0" ?>)</button>
+      </div>
+    </div>
+    <div class="col-md-1">
       <a href="controller/add-tweet.php?delete=<?php echo $rowTweet['id']; ?>" style="color: red;" class="me-4 my-auto">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
           viewBox="0 0 16 16">
@@ -33,6 +85,7 @@
         </svg>
       </a>
     </div>
+
     <hr>
     <?php endwhile ?>
     <?php else : ?>
@@ -70,3 +123,26 @@
     </div>
   </div>
 </div>
+
+<script>
+function toggleLike(statusId) {
+  const userId = document.getElementById('id_user_like').value;
+  fetch("like_status.php", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: `id_tweet=${statusId}&id_user=${userId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "liked") {
+        alert("Liked!");
+      } else if (data.status === "unliked") {
+        alert("Unliked!");
+      }
+      location.reload();
+    })
+    .catch(error => console.error("Error:", error));
+}
+</script>

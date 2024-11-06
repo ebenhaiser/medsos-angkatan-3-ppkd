@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2024 at 10:03 AM
+-- Generation Time: Nov 06, 2024 at 03:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,41 @@ SET time_zone = "+00:00";
 --
 -- Database: `angkatan3_medsos`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `id_tweet` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `comment_text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `id_tweet`, `id_user`, `comment_text`, `created_at`, `updated_at`) VALUES
+(4, 6, 6, 'wsdegtyh', '2024-11-06 01:50:14', '2024-11-06 01:50:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_tweet` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -41,7 +76,7 @@ CREATE TABLE `tweets` (
 --
 
 INSERT INTO `tweets` (`id`, `id_user`, `content`, `photo`, `created_at`, `updated_at`) VALUES
-(5, 0, '<p>Aku gantengggg</p>', '', '2024-11-04 08:38:46', '2024-11-04 08:38:46'),
+(5, 6, '<p>Aku gantengggg</p>', '', '2024-11-04 08:38:46', '2024-11-06 01:46:14'),
 (6, 6, '<p>sdfsg</p>', 'tweetPhoto6.jpg', '2024-11-04 08:45:24', '2024-11-04 08:45:24');
 
 -- --------------------------------------------------------
@@ -76,6 +111,18 @@ INSERT INTO `users` (`id`, `full_name`, `username`, `email`, `password`, `descri
 --
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tweets`
 --
 ALTER TABLE `tweets`
@@ -90,6 +137,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `likes`
+--
+ALTER TABLE `likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tweets`
